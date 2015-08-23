@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
 
         <!-- This is a centered logo -->
+        <!--
         <ImageView
             android:id="@+id/toolbar_logo"
             android:src="@drawable/ic_profile"
@@ -25,25 +26,30 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:layout_gravity="center" />
-
-        <!-- This is a centered title -->
-        <!--
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:orientation="horizontal"
+        -->
+        <ImageView
+            android:id="@+id/toolbar_logo"
+            android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_marginRight="?attr/actionBarSize"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-            />
-            -->
+            android:layout_gravity="center" />
+        <!--
 
-        <!-- This is a custom left side button -->
+             <TextView
+                 android:id="@+id/toolbar_title"
+                 android:orientation="horizontal"
+                 android:layout_width="wrap_content"
+                 android:layout_height="fill_parent"
+                 android:layout_marginRight="?attr/actionBarSize"
+                 android:layout_gravity="center"
+                 android:gravity="center_vertical"
+                 android:visibility="gone"
+                 android:text="@string/app_name"
+                 android:textColor="@color/textColorPrimary"
+                 style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+                 />
+     -->
+             <!-- This is a custom left side button -->
         <!--
         <ImageButton
             android:id="@+id/btn_settings"
@@ -57,23 +63,13 @@
             -->
 
         <!-- This is a custom right side button -->
-        <!--
         <ImageButton
-            android:id="@+id/btn_search"
+            android:id="@+id/btn_open_navmenu"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="end"
-            android:src="@drawable/ic_magnify_white_24dp"
+            android:src="@android:drawable/ic_menu_sort_by_size"
             style="@style/Widget.AppCompat.ActionButton" />
-            -->
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="end"
-            android:text="burak"
-            android:layout_gravity="right"
-
-            />
     </FrameLayout>
     </android.support.v7.widget.Toolbar>

@@ -1,6 +1,7 @@
 package net.zahiri.materialmag.adapter;
 
 import android.content.Context;
+import android.location.GpsStatus;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -9,12 +10,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import net.zahiri.materialmag.R;
+import net.zahiri.materialmag.activity.MainActivity;
 import net.zahiri.materialmag.model.NavDrawerItem;
 
 import java.util.ArrayList;
@@ -26,7 +33,7 @@ public class FragmentDrawer extends Fragment {
 
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
+    public DrawerLayout mDrawerLayout;
     private NavigationDrawerAdapter adapter;
     private View containerView;
     private static String[] titles = null;
@@ -91,18 +98,29 @@ public class FragmentDrawer extends Fragment {
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
+
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+
+
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+
+                Toast.makeText(getContext(),"open",Toast.LENGTH_SHORT).show();
+
+
+
                 getActivity().invalidateOptionsMenu();
-
-
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+
+
+
+                Toast.makeText(getContext(),"close",Toast.LENGTH_SHORT).show();
+
                 getActivity().invalidateOptionsMenu();
             }
 
@@ -111,7 +129,15 @@ public class FragmentDrawer extends Fragment {
                 super.onDrawerSlide(drawerView, slideOffset);
                 toolbar.setAlpha(1 - slideOffset / 2);
             }
+
+            @Override
+            public void setToolbarNavigationClickListener(View.OnClickListener onToolbarNavigationClickListener) {
+                super.setToolbarNavigationClickListener(onToolbarNavigationClickListener);
+
+            }
         };
+
+
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {
