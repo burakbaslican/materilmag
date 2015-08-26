@@ -16,7 +16,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import com.parse.ParseAnalytics;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.PushService;
 
 import net.zahiri.materialmag.R;
 import net.zahiri.materialmag.adapter.FragmentDrawer;
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();
+
+
 
 
     }
