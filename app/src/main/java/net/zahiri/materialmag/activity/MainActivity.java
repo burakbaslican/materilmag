@@ -7,10 +7,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import com.parse.ParseObject;
 
 import net.zahiri.materialmag.R;
 import net.zahiri.materialmag.adapter.FragmentDrawer;
@@ -18,6 +24,8 @@ import net.zahiri.materialmag.adapter.FragmentDrawer;
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
+    private ImageButton mMenuButton;
+    private SlidingMenu menuR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +37,42 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+        menuR = new SlidingMenu(this);
+        menuR.setMode(SlidingMenu.RIGHT);
+        menuR.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+
+
+
+        //     menuR.setShadowWidthRes(R.dimen.abc_action_bar_default_height);
+
+        // menu.setShadowDrawable(R.drawable.shadow);right menu
+        menuR.setBehindOffsetRes(R.dimen.nav_drawer_below_width);
+        menuR.setFadeDegree(0.35f);
+        menuR.attachToActivity(this, SlidingMenu.RIGHT);
+        menuR.setMenu(R.layout.fragment_navigation_drawer);
+
+
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.main_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
+
+
+
+        mMenuButton =(ImageButton) findViewById(R.id.btn_open_navmenu);
+
+        mMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                menuR.toggle();
+
+
+            }
+        });
+
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
 
 
     }
@@ -50,10 +91,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //menüyü aktif hale getirirsen bu alandan menüde tıklanan actionları alabilrisin
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
@@ -62,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public void onDrawerItemSelected(View view, int position) {
         displayView(position);
     }
+
+
+
 
     private void displayView(int position) {
         Fragment fragment = null;
